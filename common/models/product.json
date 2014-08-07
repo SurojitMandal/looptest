@@ -1,0 +1,10 @@
+{
+  "name": "Product",
+  "plural": "Products",
+  "base": "Model",
+  "properties": {},
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": []
+}

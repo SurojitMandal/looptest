@@ -1,0 +1,49 @@
+{
+  "db": {
+    "name": "db",
+    "connector": "memory"
+  },
+  "wcsProductDS": {
+    "name": "wcsProductDS",
+    "connector": "rest",
+    "debug": "true",
+    "operations": [
+      {
+        "template": {
+          "method": "GET",
+          "url": "http://toothless.ngrok.com/search/resources/store/11001/productview/byId/{productId}",
+          "headers": {
+            "content-type": "application/json"
+          },
+          "query": {
+               "$productId": "{productId}"
+              },
+          "responsePath": "$.results[0]"
+        },
+        "functions": {
+          "getProductById": ["productId"]
+        }
+      }
+    ]
+  },
+  "wcsCategoryDS": {
+    "name": "wcsCategoryDS",
+    "connector": "rest",
+    "debug": "true",
+    "operations": [
+      {
+        "template": {
+          "method": "GET",
+          "url": "http://toothless.ngrok.com/wcs/resources/store/11001/categoryview/byId/10306",
+          "headers": {
+            "content-type": "application/json"
+          },
+          "responsePath": "$.results[0]"
+        },
+        "functions": {
+          "getCategoryById": []
+        }
+      }
+    ]
+  }
+}
