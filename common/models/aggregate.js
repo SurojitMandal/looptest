@@ -17,27 +17,12 @@ aggregateModel.sharedClass.find('deleteById',true).shared = false;
 aggregateModel.sharedClass.find('count',true).shared = false;
 aggregateModel.sharedClass.find('updateAttributes',false).shared = false;
 
+// Adding a new remote method "testMethod" on Model "Aggregate"
 module.exports = function(Aggregate) {
 	Aggregate.testMethod = function(cb) {
 
-		async.parallel([
-			function(cb) {
-				callRestService('Product', cb);
-			},
-
-			function(cb) {
-				callRestService('Category', cb);	
-			}
-
-		], 
-		// Callback function
-		function(err, results) {
-			console.log("final: " + results);
-			cb(null, results);
-		})
-
 		function callRestService (serviceName, cb) {
-			searchResults = [];
+			var searchResults = [];
 
 			if(serviceName == 'Product') {
 				var dsProduct = app.dataSources.wcsProductDS;
@@ -49,6 +34,8 @@ module.exports = function(Aggregate) {
 						return;
 					}
 		        	searchResults.push(Persons);
+		        	//searchResults.push("Alffrey");
+		        	//console.log(searchResults);
 		        	console.log("1: " + searchResults);
 		        });
 
@@ -62,6 +49,8 @@ module.exports = function(Aggregate) {
 						return;
 					}
 		        	searchResults.push(Categorys);
+		        	//searchResults.push("George");
+		        	//console.log(searchResults);
 		        	console.log("2: " + searchResults);
 		        });
 			}
@@ -70,12 +59,31 @@ module.exports = function(Aggregate) {
 			cb(null, searchResults);
 		}
 
+		async.parallel([
+			function(cb) {
+				callRestService('Product', cb);
+			},
+
+			function(cb) {
+				callRestService('Category', cb);	
+			}
+
+		], 
+		// Callback function
+		function(err, results) {
+			console.log("final: " + results.length);
+			for(i=0;i<results.length;i++) {
+	            console.log("result: " + results[i]);
+	          }
+			cb(null, results);
+		})
+
 	}
 
 	Aggregate.remoteMethod(
 		'testMethod',
 		{
-			returns: {arg:'Aggregate', type: 'object'}
+			returns: {arg:'Aggregate', type: 'Object'}
 		}
 	);
 }
