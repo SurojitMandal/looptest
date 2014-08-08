@@ -31,5 +31,9 @@
   "Category": {
     "dataSource": "wcsCategoryDS",
     "public": true
+  },
+  "Aggregate": {
+    "dataSource": "db",
+    "public": true
   }
 }
