@@ -34,8 +34,7 @@ module.exports = function(Aggregate) {
 						return;
 					}
 		        	searchResults.push(Persons);
-		        	//searchResults.push("Alffrey");
-		        	//console.log(searchResults);
+		        	cb(null, searchResults);
 		        	console.log("1: " + searchResults);
 		        });
 
@@ -49,14 +48,10 @@ module.exports = function(Aggregate) {
 						return;
 					}
 		        	searchResults.push(Categorys);
-		        	//searchResults.push("George");
-		        	//console.log(searchResults);
+		        	cb(null, searchResults);
 		        	console.log("2: " + searchResults);
 		        });
 			}
-
-			console.log("3: " + searchResults);
-			cb(null, searchResults);
 		}
 
 		async.parallel([
