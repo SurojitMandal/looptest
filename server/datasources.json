@@ -11,14 +11,23 @@
       {
         "template": {
           "method": "GET",
-          "url": "http://toothless.ngrok.com/search/resources/store/11001/productview/byId/{productId}",
+          "url": "http://localhost/search/resources/store/{storeId=10001}/productview/byId/{!productId}",
           "headers": {
             "content-type": "application/json"
+          },
+          "query": {
+            "currency": "{currency=USD}",
+            "langId": "{langId=-1}",
+            "responseFormat": "{responseFormat=json}"
           }
         },
         "functions": {
           "getProductById": [
-            "productId"
+            "productId",
+            "responseFormat",
+            "currency",
+            "langId",
+            "storeId"
           ]
         }
       }
@@ -32,14 +41,125 @@
       {
         "template": {
           "method": "GET",
-          "url": "http://toothless.ngrok.com/wcs/resources/store/11001/categoryview/byId/{categoryId}",
+          "url": "http://localhost/search/resources/store/{storeId=10001}/categoryview/byId/{!categoryId}",
           "headers": {
             "content-type": "application/json"
+          },
+          "query": {
+            "currency": "{currency=USD}",
+            "langId": "{langId=-1}",
+            "responseFormat": "{responseFormat=json}"
           }
         },
         "functions": {
           "getCategoryById": [
-            "categoryId"
+            "categoryId",
+            "responseFormat",
+            "currency",
+            "langId",
+            "storeId"
+          ]
+        }
+      }
+    ]
+  },
+  "wcsProductSearchDS": {
+    "name": "wcsProductSearchDS",
+    "connector": "rest",
+    "debug": "true",
+    "operations": [
+      {
+        "template": {
+          "method": "GET",
+          "url": "http://localhost/search/resources/store/{storeId=10001}/productview/byId/{!productId}",
+          "headers": {
+            "content-type": "application/json"
+          },
+          "query": {
+            "currency": "{currency=USD}",
+            "langId": "{langId=-1}",
+            "responseFormat": "{responseFormat=json}"
+          }
+        },
+        "functions": {
+          "findProductById": [
+            "productId",
+            "storeId",
+            "responseFormat",
+            "currency",
+            "langId"
+          ]
+        }
+      },
+      
+      {
+        "template": {
+          "method": "GET",
+          "url": "http://localhost/search/resources/store/{storeId=10001}/productview/bySearchTerm/{!searchTerm}",
+          "headers": {
+            "content-type": "application/json"
+          },
+          "query": {
+            "currency": "{currency=USD}",
+            "langId": "{langId=-1}",
+            "responseFormat": "{responseFormat=json}"
+          }
+        },
+        "functions": {
+          "findProductsBySearchTerm": [
+            "searchTerm",
+            "storeId",
+            "responseFormat",
+            "currency",
+            "langId"
+          ]
+        }
+      },
+      
+      {
+        "template": {
+          "method": "GET",
+          "url": "http://localhost/search/resources/store/{storeId=10001}/productview/{!partNumber}",
+          "headers": {
+            "content-type": "application/json"
+          },
+          "query": {
+            "currency": "{currency=USD}",
+            "langId": "{langId=-1}",
+            "responseFormat": "{responseFormat=json}"
+          }
+        },
+        "functions": {
+          "findProductByPartNumber": [
+            "partNumber",
+            "storeId",
+            "responseFormat",
+            "currency",
+            "langId"
+          ]
+        }
+      },
+     
+      {
+        "template": {
+          "method": "GET",
+          "url": "http://localhost/search/resources/store/{storeId=10001}/productview/byCategory/{!categoryId}",
+          "headers": {
+            "content-type": "application/json"
+          },
+          "query": {
+            "currency": "{currency=USD}",
+            "langId": "{langId=-1}",
+            "responseFormat": "{responseFormat=json}"
+          }
+        },
+        "functions": {
+          "findProductsByCategory": [
+            "categoryId",
+            "storeId",
+            "responseFormat",
+            "currency",
+            "langId"
           ]
         }
       }

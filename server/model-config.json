@@ -32,6 +32,10 @@
     "dataSource": "wcsCategoryDS",
     "public": true
   },
+  "ProductSearch": {
+    "dataSource": "wcsProductSearchDS",
+    "public": true
+  },
   "Aggregate": {
     "dataSource": "db",
     "public": true
